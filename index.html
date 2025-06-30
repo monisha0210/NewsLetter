@@ -6,252 +6,240 @@
     <title>Newsletter Pro - Stay Informed</title>
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
-<body>
-    <header>
-        <nav class="container">
-            <a href="#" class="logo" onclick="showSection('home')">NewsletterPro</a>
-            <div class="nav-links">
-                <a href="#" onclick="showSection('home')">Home</a>
-                <a href="#" onclick="showSection('newsletters')">Newsletters</a>
-                <a href="#" onclick="showSection('donate')">Support Us</a>
-                <div id="authButtons">
-                    <a href="#" class="btn btn-secondary" onclick="showSection('login')">Login</a>
-                    <a href="#" class="btn btn-primary" onclick="showSection('register')">Sign Up</a>
-                </div>
-                <div id="userMenu" class="hidden">
-                    <span id="welcomeUser"></span>
-                    <a href="#" class="btn btn-secondary" onclick="showSection('dashboard')">Dashboard</a>
-                    <a href="#" class="btn btn-primary" onclick="logout()">Logout</a>
-                </div>
+<body class="logged-out">
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">NewsLetter</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#newsletter">Newsletter</a></li>
+                <li><a href="#donate">Donate</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <button class="btn btn-secondary login-btn" onclick="openModal('loginModal')">Login</button>
+                <button class="btn btn-primary register-btn" onclick="openModal('registerModal')">Sign Up</button>
+                <button class="btn btn-secondary logout-btn" onclick="logout()" style="display: none;">Logout</button>
             </div>
         </nav>
     </header>
 
-    <main class="container">
-        <!-- Home Section -->
-        <section id="home" class="section active">
-            <div class="hero">
-                <h1>Stay Informed with Our Newsletter</h1>
-                <p>Get the latest insights, news, and updates delivered directly to your inbox</p>
-                <div>
-                    <a href="#" class="btn btn-primary" onclick="showSection('register')">Subscribe Now</a>
-                    <a href="#" class="btn btn-secondary" onclick="showSection('newsletters')">Browse Newsletters</a>
-                </div>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Stay Informed, Stay Connected</h1>
+            <p>Get the latest news, insights, and updates delivered straight to your inbox. Join thousands of readers who trust NewsWave for quality content.</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" onclick="document.getElementById('newsletter').scrollIntoView()">Subscribe Now</button>
+                <button class="btn btn-secondary" onclick="document.getElementById('donate').scrollIntoView()">Support Us</button>
             </div>
+        </div>
+    </section>
 
-            <div class="newsletter-grid">
-                <div class="newsletter-card">
-                    <h3>Tech Weekly</h3>
-                    <div class="date">June 20, 2025</div>
-                    <p>Latest trends in technology, AI developments, and startup news that matter to you.</p>
-                    <a href="#" class="btn btn-primary" onclick="showSection('newsletters')">Read More</a>
-                </div>
-                <div class="newsletter-card">
-                    <h3>Business Insights</h3>
-                    <div class="date">June 18, 2025</div>
-                    <p>Market analysis, investment tips, and business strategies from industry experts.</p>
-                    <a href="#" class="btn btn-primary" onclick="showSection('newsletters')">Read More</a>
-                </div>
-                <div class="newsletter-card">
-                    <h3>Health & Wellness</h3>
-                    <div class="date">June 15, 2025</div>
-                    <p>Evidence-based health advice, wellness tips, and lifestyle recommendations.</p>
-                    <a href="#" class="btn btn-primary" onclick="showSection('newsletters')">Read More</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Login Section -->
-        <section id="login" class="section">
-            <div class="form-container">
-                <h2 style="text-align: center; margin-bottom: 2rem; color: #667eea;">Login to Your Account</h2>
-                <div id="loginMessage" class="success-message"></div>
-                <div id="loginError" class="error-message"></div>
-                <form id="loginForm">
-                    <div class="form-group">
-                        <label for="loginEmail">Email</label>
-                        <input type="email" id="loginEmail" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="loginPassword">Password</label>
-                        <input type="password" id="loginPassword" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
-                </form>
-                <p style="text-align: center; margin-top: 1rem;">
-                    Don't have an account? <a href="#" onclick="showSection('register')" style="color: #667eea;">Sign up here</a>
-                </p>
-            </div>
-        </section>
-
-        <!-- Register Section -->
-        <section id="register" class="section">
-            <div class="form-container">
-                <h2 style="text-align: center; margin-bottom: 2rem; color: #667eea;">Create Your Account</h2>
-                <div id="registerMessage" class="success-message"></div>
-                <div id="registerError" class="error-message"></div>
-                <form id="registerForm">
-                    <div class="form-group">
-                        <label for="registerName">Full Name</label>
-                        <input type="text" id="registerName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="registerEmail">Email</label>
-                        <input type="email" id="registerEmail" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="registerPassword">Password</label>
-                        <input type="password" id="registerPassword" required minlength="6">
-                    </div>
-                    <div class="form-group">
-                        <label for="confirmPassword">Confirm Password</label>
-                        <input type="password" id="confirmPassword" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">Sign Up</button>
-                </form>
-                <p style="text-align: center; margin-top: 1rem;">
-                    Already have an account? <a href="#" onclick="showSection('login')" style="color: #667eea;">Login here</a>
-                </p>
-            </div>
-        </section>
-
-        <!-- Dashboard Section -->
-        <section id="dashboard" class="section">
-            <h2 style="text-align: center; margin-bottom: 2rem; color: #667eea;">Your Dashboard</h2>
-            <div class="dashboard-stats">
-                <div class="stat-card">
-                    <h3>12</h3>
-                    <p>Newsletters Read</p>
-                </div>
-                <div class="stat-card">
-                    <h3>5</h3>
-                    <p>Subscriptions</p>
-                </div>
-                <div class="stat-card">
-                    <h3>$25</h3>
-                    <p>Total Donated</p>
-                </div>
-            </div>
-            
-            <div style="background: white; padding: 2rem; border-radius: 15px; margin: 2rem 0;">
-                <h3 style="color: #667eea; margin-bottom: 1rem;">Your Subscriptions</h3>
-                <div class="newsletter-grid">
-                    <div class="newsletter-card">
-                        <h4>Tech Weekly</h4>
-                        <p>Subscribed since: Jan 2025</p>
-                        <button class="btn btn-secondary">Manage</button>
-                    </div>
-                    <div class="newsletter-card">
-                        <h4>Business Insights</h4>
-                        <p>Subscribed since: Feb 2025</p>
-                        <button class="btn btn-secondary">Manage</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Newsletters Section -->
-        <section id="newsletters" class="section">
-            <h2 style="text-align: center; margin-bottom: 2rem; color: #667eea;">Our Newsletters</h2>
+    <!-- Newsletter Section -->
+    <section class="newsletter-section" id="newsletter">
+        <div class="container">
+            <h2 class="section-title">Our Newsletter Categories</h2>
             
             <div class="newsletter-grid">
                 <div class="newsletter-card">
-                    <h3>Tech Weekly - June 20, 2025</h3>
-                    <div class="date">Published 5 days ago</div>
-                    <p><strong>AI Revolution Continues:</strong> This week we explore the latest developments in artificial intelligence, including new breakthrough models and their impact on various industries...</p>
-                    <p><strong>Startup Spotlight:</strong> Three innovative startups that are changing the game in fintech, healthtech, and clean energy sectors...</p>
-                    <button class="btn btn-primary">Read Full Newsletter</button>
+                    <h3>📰 Daily News</h3>
+                    <p>Stay updated with the latest breaking news and current events from around the world.</p>
                 </div>
-
                 <div class="newsletter-card">
-                    <h3>Business Insights - June 18, 2025</h3>
-                    <div class="date">Published 1 week ago</div>
-                    <p><strong>Market Analysis:</strong> Q2 earnings season kicks off with strong performances from major tech companies, signaling robust economic growth...</p>
-                    <p><strong>Investment Tip:</strong> Why diversification remains key in today's volatile markets, plus our top 3 sectors to watch...</p>
-                    <button class="btn btn-primary">Read Full Newsletter</button>
+                    <h3>💼 Business Insights</h3>
+                    <p>Get expert analysis on market trends, startup stories, and business opportunities.</p>
                 </div>
-
                 <div class="newsletter-card">
-                    <h3>Health & Wellness - June 15, 2025</h3>
-                    <div class="date">Published 1 week ago</div>
-                    <p><strong>Summer Wellness:</strong> Staying hydrated and maintaining energy levels during the hot months with evidence-based strategies...</p>
-                    <p><strong>Mental Health Focus:</strong> Simple mindfulness techniques that can be practiced anywhere, backed by recent psychological research...</p>
-                    <button class="btn btn-primary">Read Full Newsletter</button>
+                    <h3>🔬 Tech Updates</h3>
+                    <p>Discover the latest in technology, innovation, and digital transformation.</p>
                 </div>
-
                 <div class="newsletter-card">
-                    <h3>Tech Weekly - June 13, 2025</h3>
-                    <div class="date">Published 2 weeks ago</div>
-                    <p><strong>Quantum Computing Breakthrough:</strong> Major advancement in quantum error correction brings us closer to practical quantum computers...</p>
-                    <p><strong>Privacy Update:</strong> New regulations around data privacy and what they mean for consumers and businesses...</p>
-                    <button class="btn btn-primary">Read Full Newsletter</button>
+                    <h3>🎨 Lifestyle & Culture</h3>
+                    <p>Explore art, culture, wellness, and lifestyle trends that matter to you.</p>
                 </div>
             </div>
-        </section>
 
-        <!-- Donate Section -->
-        <section id="donate" class="section">
-            <div style="max-width: 600px; margin: 0 auto; text-align: center;">
-                <h2 style="color: #667eea; margin-bottom: 2rem;">Support Our Mission</h2>
-                <p style="font-size: 1.1rem; margin-bottom: 2rem; color: #666;">
-                    Your donations help us continue providing high-quality, ad-free newsletters to our community. 
-                    Every contribution makes a difference in keeping independent journalism alive.
-                </p>
-
-                <div class="donation-options">
-                    <div class="donation-amount" onclick="selectAmount(5)">
-                        <h4>$5</h4>
-                        <p>Coffee Fund</p>
+            <div class="subscribe-form">
+                <h3 style="text-align: center; margin-bottom: 2rem; color: #667eea;">Subscribe to Our Newsletter</h3>
+                <form id="subscribeForm" onsubmit="subscribe(event)">
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
                     </div>
-                    <div class="donation-amount" onclick="selectAmount(15)">
-                        <h4>$15</h4>
-                        <p>Supporter</p>
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" required>
                     </div>
-                    <div class="donation-amount" onclick="selectAmount(25)">
-                        <h4>$25</h4>
-                        <p>Advocate</p>
-                    </div>
-                    <div class="donation-amount" onclick="selectAmount(50)">
-                        <h4>$50</h4>
-                        <p>Champion</p>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="customAmount">Or enter a custom amount:</label>
-                    <input type="number" id="customAmount" placeholder="Enter amount" min="1" style="max-width: 200px; margin: 0 auto;">
-                </div>
-
-                <div class="paypal-button">
-                    <p style="margin-bottom: 1rem; color: #666;">Selected Amount: $<span id="selectedAmount">15</span></p>
-                    
-                    <!-- PayPal Button Container -->
-                    <div id="paypal-button-container" style="margin: 1rem 0;"></div>
-                    
-                    <!-- Alternative donation links -->
-                    <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #eee;">
-                        <h4 style="margin-bottom: 1rem; color: #667eea;">Other Ways to Support</h4>
-                        <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
-                            <a href="https://ko-fi.com/yournewsletter" target="_blank" class="btn btn-secondary">Ko-fi</a>
-                            <a href="https://www.patreon.com/yournewsletter" target="_blank" class="btn btn-secondary">Patreon</a>
-                            <a href="https://github.com/sponsors/yournewsletter" target="_blank" class="btn btn-secondary">GitHub Sponsors</a>
+                    <div class="form-group">
+                        <label>Newsletter Categories (Select all that apply)</label>
+                        <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 0.5rem;">
+                            <label style="display: flex; align-items: center; font-weight: normal;">
+                                <input type="checkbox" name="categories" value="daily-news" style="margin-right: 0.5rem;">
+                                Daily News
+                            </label>
+                            <label style="display: flex; align-items: center; font-weight: normal;">
+                                <input type="checkbox" name="categories" value="business" style="margin-right: 0.5rem;">
+                                Business
+                            </label>
+                            <label style="display: flex; align-items: center; font-weight: normal;">
+                                <input type="checkbox" name="categories" value="tech" style="margin-right: 0.5rem;">
+                                Technology
+                            </label>
+                            <label style="display: flex; align-items: center; font-weight: normal;">
+                                <input type="checkbox" name="categories" value="lifestyle" style="margin-right: 0.5rem;">
+                                Lifestyle
+                            </label>
                         </div>
                     </div>
-                </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
+                        Subscribe Now
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
 
-                <div style="margin-top: 2rem; padding: 1.5rem; background: #f8f9fa; border-radius: 10px;">
-                    <h4 style="color: #667eea; margin-bottom: 1rem;">Why Your Support Matters</h4>
-                    <ul style="text-align: left; color: #666;">
-                        <li>Keeps our content ad-free and unbiased</li>
-                        <li>Supports independent journalism</li>
-                        <li>Helps us research and verify information</li>
-                        <li>Enables us to improve our platform</li>
-                        <li>Allows us to reach more readers</li>
-                    </ul>
+    <!-- Donation Section -->
+    <section class="donation-section" id="donate">
+        <div class="container">
+            <h2 class="section-title">Support Quality Journalism</h2>
+            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem; color: #666;">
+                Your support helps us continue delivering high-quality, independent journalism. Choose your contribution level:
+            </p>
+            
+            <div class="donation-cards">
+                <div class="donation-card">
+                    <div class="donation-amount">$5</div>
+                    <p>Coffee Supporter</p>
+                    <p style="color: #666; margin: 1rem 0;">Help us stay caffeinated while we write!</p>
+                    <button class="btn btn-primary" onclick="donate(5)">Donate $5</button>
+                </div>
+                <div class="donation-card">
+                    <div class="donation-amount">$15</div>
+                    <p>Newsletter Friend</p>
+                    <p style="color: #666; margin: 1rem 0;">Support our monthly newsletter production</p>
+                    <button class="btn btn-primary" onclick="donate(15)">Donate $15</button>
+                </div>
+                <div class="donation-card">
+                    <div class="donation-amount">$50</div>
+                    <p>Journalism Champion</p>
+                    <p style="color: #666; margin: 1rem 0;">Make a significant impact on our reporting</p>
+                    <button class="btn btn-primary" onclick="donate(50)">Donate $50</button>
+                </div>
+                <div class="donation-card">
+                    <div class="donation-amount">Custom</div>
+                    <p>Your Choice</p>
+                    <p style="color: #666; margin: 1rem 0;">Enter any amount you'd like to contribute</p>
+                    <input type="number" id="customAmount" placeholder="Enter amount" style="width: 100%; padding: 0.5rem; margin: 1rem 0; border: 2px solid #e0e0e0; border-radius: 5px;">
+                    <button class="btn btn-primary" onclick="donateCustom()">Donate</button>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
+
+    <!-- User Dashboard (Hidden by default) -->
+    <section class="dashboard" id="dashboard">
+        <div class="container">
+            <div class="dashboard-header">
+                <h2 class="section-title">Welcome to Your Dashboard</h2>
+                <p style="text-align: center; font-size: 1.2rem; color: #666;">
+                    Manage your newsletter preferences and account settings
+                </p>
+            </div>
+            
+            <div class="dashboard-grid">
+                <div class="dashboard-card user-info">
+                    <div class="user-avatar" id="userAvatar">U</div>
+                    <h3 id="userName">User Name</h3>
+                    <p id="userEmail">user@example.com</p>
+                    <p style="color: #666; margin-top: 1rem;">Member Since: <span id="memberSince">Today</span></p>
+                </div>
+                
+                <div class="dashboard-card">
+                    <h3 style="color: #667eea; margin-bottom: 1rem;">Newsletter Preferences</h3>
+                    <div id="userPreferences">
+                        <p>Loading preferences...</p>
+                    </div>
+                    <button class="btn btn-primary" style="margin-top: 1rem;" onclick="editPreferences()">
+                        Edit Preferences
+                    </button>
+                </div>
+                
+                <div class="dashboard-card">
+                    <h3 style="color: #667eea; margin-bottom: 1rem;">Donation History</h3>
+                    <div id="donationHistory">
+                        <p>No donations yet. Thank you for considering supporting us!</p>
+                    </div>
+                    <button class="btn btn-secondary" style="margin-top: 1rem;" onclick="document.getElementById('donate').scrollIntoView()">
+                        Make a Donation
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('loginModal')">&times;</span>
+            <h2 style="text-align: center; margin-bottom: 2rem; color: #667eea;">Login</h2>
+            <form id="loginForm" onsubmit="login(event)">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+            </form>
+            <p style="text-align: center; margin-top: 1rem;">
+                Don't have an account? <a href="#" onclick="closeModal('loginModal'); openModal('registerModal')" style="color: #667eea;">Sign up here</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('registerModal')">&times;</span>
+            <h2 style="text-align: center; margin-bottom: 2rem; color: #667eea;">Sign Up</h2>
+            <form id="registerForm" onsubmit="register(event)">
+                <div class="form-group">
+                    <label for="registerName">Full Name</label>
+                    <input type="text" id="registerName" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">Email</label>
+                    <input type="email" id="registerEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Password</label>
+                    <input type="password" id="registerPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Sign Up</button>
+            </form>
+            <p style="text-align: center; margin-top: 1rem;">
+                Already have an account? <a href="#" onclick="closeModal('registerModal'); openModal('loginModal')" style="color: #667eea;">Login here</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 NewsWave. All rights reserved.</p>
+            <p style="margin-top: 1rem; opacity: 0.8;">
+                Stay connected: 
+                <a href="#" style="color: #4ecdc4; margin: 0 0.5rem;">Twitter</a>
+                <a href="#" style="color: #4ecdc4; margin: 0 0.5rem;">Facebook</a>
+                <a href="#" style="color: #4ecdc4; margin: 0 0.5rem;">LinkedIn</a>
+            </p>
+        </div>
+    </footer>
     <script src="./assets/js/script.js"></script>
         
 </body>
