@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NewsLetter - Stay Informed, Stay Connected</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            color: #4ecdc4;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        /* Newsletter Section */
+        .newsletter-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .newsletter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .newsletter-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .newsletter-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .newsletter-card h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        /* Subscription Form */
+        .subscribe-form {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            margin: 3rem 0;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        /* Donation Section */
+        .donation-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+        }
+
+        .donation-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .donation-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .donation-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .donation-amount {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 400px;
+            position: relative;
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        .close {
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .close:hover {
+            color: #333;
+        }
+
+        /* User Dashboard */
+        .dashboard {
+            display: none;
+            padding: 120px 0 80px;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+        }
+
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .dashboard-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .user-info {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .user-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .nav {
+                padding: 0 1rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .newsletter-grid,
+            .donation-cards,
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .subscribe-form {
+                padding: 2rem;
+            }
+        }
+
+        /* Hide/Show based on login state */
+        .logged-out .dashboard {
+            display: none !important;
+        }
+
+        .logged-in .hero,
+        .logged-in .newsletter-section {
+            display: none !important;
+        }
+
+        .logged-in .dashboard {
+            display: block !important;
+        }
+
+        .logged-in .auth-buttons .login-btn,
+        .logged-in .auth-buttons .register-btn {
+            display: none !important;
+        }
+
+        .logged-out .auth-buttons .logout-btn {
+            display: none !important;
+        }
+    </style>
+</head>
+<body class="logged-out">
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">NewsLetter</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#newsletter">Newsletter</a></li>
+                <li><a href="#donate">Donate</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <button class="btn btn-secondary login-btn" onclick="openModal('loginModal')">Login</button>
+                <button class="btn btn-primary register-btn" onclick="openModal('registerModal')">Sign Up</button>
+                <button class="btn btn-secondary logout-btn" onclick="logout()" style="display: none;">Logout</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Stay Informed, Stay Connected</h1>
+            <p>Get the latest news, insights, and updates delivered straight to your inbox. Join thousands of readers who trust NewsWave for quality content.</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" onclick="document.getElementById('newsletter').scrollIntoView()">Subscribe Now</button>
+                <button class="btn btn-secondary" onclick="document.getElementById('donate').scrollIntoView()">Support Us</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section" id="newsletter">
+        <div class="container">
+            <h2 class="section-title">Our Newsletter Categories</h2>
+            
+            <div class="newsletter-grid">
+                <div class="newsletter-card">
+                    <h3>📰 Daily News</h3>
+                    <p>Stay updated with the latest breaking news and current events from around the world.</p>
+                </div>
+                <div class="newsletter-card">
+                    <h3>💼 Business Insights</h3>
+                    <p>Get expert analysis on market trends, startup stories, and business opportunities.</p>
+                </div>
+                <div class="newsletter-card">
+                    <h3>🔬 Tech Updates</h3>
+                    <p>Discover the latest in technology, innovation, and digital transformation.</p>
+                </div>
+                <div class="newsletter-card">
+                    <h3>🎨 Lifestyle & Culture</h3>
+                    <p>Explore art, culture, wellness, and lifestyle trends that matter to you.</p>
+                </div>
+            </div>
+
+            <div class="subscribe-form">
+                <h3 style="text-align: center; margin-bottom: 2rem; color: #667eea;">Subscribe to Our Newsletter</h3>
+                <form id="subscribeForm" onsubmit="subscribe(event)">
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Newsletter Categories (Select all that apply)</label>
+                        <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 0.5rem;">
+                            <label style="display: flex; align-items: center; font-weight: normal;">
+                                <input type="checkbox" name="categories" value="daily-news" style="margin-right: 0.5rem;">
+                                Daily News
+                            </label>
+                            <label style="display: flex; align-items: center; font-weight: normal;">
+                                <input type="checkbox" name="categories" value="business" style="margin-right: 0.5rem;">
+                                Business
+                            </label>
+                            <label style="display: flex; align-items: center; font-weight: normal;">
+                                <input type="checkbox" name="categories" value="tech" style="margin-right: 0.5rem;">
+                                Technology
+                            </label>
+                            <label style="display: flex; align-items: center; font-weight: normal;">
+                                <input type="checkbox" name="categories" value="lifestyle" style="margin-right: 0.5rem;">
+                                Lifestyle
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
+                        Subscribe Now
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Donation Section -->
+    <section class="donation-section" id="donate">
+        <div class="container">
+            <h2 class="section-title">Support Quality Journalism</h2>
+            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem; color: #666;">
+                Your support helps us continue delivering high-quality, independent journalism. Choose your contribution level:
+            </p>
+            
+            <div class="donation-cards">
+                <div class="donation-card">
+                    <div class="donation-amount">$5</div>
+                    <p>Coffee Supporter</p>
+                    <p style="color: #666; margin: 1rem 0;">Help us stay caffeinated while we write!</p>
+                    <button class="btn btn-primary" onclick="donate(5)">Donate $5</button>
+                </div>
+                <div class="donation-card">
+                    <div class="donation-amount">$15</div>
+                    <p>Newsletter Friend</p>
+                    <p style="color: #666; margin: 1rem 0;">Support our monthly newsletter production</p>
+                    <button class="btn btn-primary" onclick="donate(15)">Donate $15</button>
+                </div>
+                <div class="donation-card">
+                    <div class="donation-amount">$50</div>
+                    <p>Journalism Champion</p>
+                    <p style="color: #666; margin: 1rem 0;">Make a significant impact on our reporting</p>
+                    <button class="btn btn-primary" onclick="donate(50)">Donate $50</button>
+                </div>
+                <div class="donation-card">
+                    <div class="donation-amount">Custom</div>
+                    <p>Your Choice</p>
+                    <p style="color: #666; margin: 1rem 0;">Enter any amount you'd like to contribute</p>
+                    <input type="number" id="customAmount" placeholder="Enter amount" style="width: 100%; padding: 0.5rem; margin: 1rem 0; border: 2px solid #e0e0e0; border-radius: 5px;">
+                    <button class="btn btn-primary" onclick="donateCustom()">Donate</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- User Dashboard (Hidden by default) -->
+    <section class="dashboard" id="dashboard">
+        <div class="container">
+            <div class="dashboard-header">
+                <h2 class="section-title">Welcome to Your Dashboard</h2>
+                <p style="text-align: center; font-size: 1.2rem; color: #666;">
+                    Manage your newsletter preferences and account settings
+                </p>
+            </div>
+            
+            <div class="dashboard-grid">
+                <div class="dashboard-card user-info">
+                    <div class="user-avatar" id="userAvatar">U</div>
+                    <h3 id="userName">User Name</h3>
+                    <p id="userEmail">user@example.com</p>
+                    <p style="color: #666; margin-top: 1rem;">Member Since: <span id="memberSince">Today</span></p>
+                </div>
+                
+                <div class="dashboard-card">
+                    <h3 style="color: #667eea; margin-bottom: 1rem;">Newsletter Preferences</h3>
+                    <div id="userPreferences">
+                        <p>Loading preferences...</p>
+                    </div>
+                    <button class="btn btn-primary" style="margin-top: 1rem;" onclick="editPreferences()">
+                        Edit Preferences
+                    </button>
+                </div>
+                
+                <div class="dashboard-card">
+                    <h3 style="color: #667eea; margin-bottom: 1rem;">Donation History</h3>
+                    <div id="donationHistory">
+                        <p>No donations yet. Thank you for considering supporting us!</p>
+                    </div>
+                    <button class="btn btn-secondary" style="margin-top: 1rem;" onclick="document.getElementById('donate').scrollIntoView()">
+                        Make a Donation
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('loginModal')">&times;</span>
+            <h2 style="text-align: center; margin-bottom: 2rem; color: #667eea;">Login</h2>
+            <form id="loginForm" onsubmit="login(event)">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+            </form>
+            <p style="text-align: center; margin-top: 1rem;">
+                Don't have an account? <a href="#" onclick="closeModal('loginModal'); openModal('registerModal')" style="color: #667eea;">Sign up here</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('registerModal')">&times;</span>
+            <h2 style="text-align: center; margin-bottom: 2rem; color: #667eea;">Sign Up</h2>
+            <form id="registerForm" onsubmit="register(event)">
+                <div class="form-group">
+                    <label for="registerName">Full Name</label>
+                    <input type="text" id="registerName" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">Email</label>
+                    <input type="email" id="registerEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Password</label>
+                    <input type="password" id="registerPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Sign Up</button>
+            </form>
+            <p style="text-align: center; margin-top: 1rem;">
+                Already have an account? <a href="#" onclick="closeModal('registerModal'); openModal('loginModal')" style="color: #667eea;">Login here</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 NewsWave. All rights reserved.</p>
+            <p style="margin-top: 1rem; opacity: 0.8;">
+                Stay connected: 
+                <a href="#" style="color: #4ecdc4; margin: 0 0.5rem;">Twitter</a>
+                <a href="#" style="color: #4ecdc4; margin: 0 0.5rem;">Facebook</a>
+                <a href="#" style="color: #4ecdc4; margin: 0 0.5rem;">LinkedIn</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // User management
+        let currentUser = null;
+        let users = JSON.parse(localStorage.getItem('newsletterUsers') || '[]');
+        let subscriptions = JSON.parse(localStorage.getItem('newsletterSubscriptions') || '[]');
+        let donations = JSON.parse(localStorage.getItem('newsletterDonations') || '[]');
+
+        // Check if user is logged in on page load
+        const savedUser = localStorage.getItem('currentUser');
+        if (savedUser) {
+            currentUser = JSON.parse(savedUser);
+            updateUIForLoggedInUser();
+        }
+
+        // Modal functions
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+
+        // Registration
+        function register(event) {
+            event.preventDefault();
+            const name = document.getElementById('registerName').value;
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+
+            // Check if user already exists
+            if (users.find(user => user.email === email)) {
+                alert('User with this email already exists!');
+                return;
+            }
+
+            // Create new user
+            const newUser = {
+                id: Date.now().toString(),
+                name: name,
+                email: email,
+                password: password, // In real app, this should be hashed
+                joinDate: new Date().toISOString(),
+                preferences: []
+            };
+
+            users.push(newUser);
+            localStorage.setItem('newsletterUsers', JSON.stringify(users));
+            
+            // Auto-login after registration
+            currentUser = newUser;
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            
+            closeModal('registerModal');
+            updateUIForLoggedInUser();
+            alert('Registration successful! Welcome to NewsWave!');
+        }
+
+        // Login
+        function login(event) {
+            event.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            const user = users.find(u => u.email === email && u.password === password);
+            
+            if (user) {
+                currentUser = user;
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                closeModal('loginModal');
+                updateUIForLoggedInUser();
+                alert('Login successful! Welcome back!');
+            } else {
+                alert('Invalid email or password!');
+            }
+        }
+
+        // Logout
+        function logout() {
+            currentUser = null;
+            localStorage.removeItem('currentUser');
+            document.body.className = 'logged-out';
+            alert('You have been logged out successfully!');
+        }
+
+        // Update UI for logged in user
+        function updateUIForLoggedInUser() {
+            if (currentUser) {
+                document.body.className = 'logged-in';
+                
+                // Update dashboard info
+                document.getElementById('userName').textContent = currentUser.name;
+                document.getElementById('userEmail').textContent = currentUser.email;
+                document.getElementById('userAvatar').textContent = currentUser.name.charAt(0).toUpperCase();
+                document.getElementById('memberSince').textContent = new Date(currentUser.joinDate).toLocaleDateString();
+                
+                // Update preferences
+                updateUserPreferences();
+                updateDonationHistory();
+            }
+        }
+
+        // Newsletter subscription
+        function subscribe(event) {
+            event.preventDefault();
+            const email = document.getElementById('email').value;
+            const name = document.getElementById('name').value;
+            const checkboxes = document.querySelectorAll('input[name="categories"]:checked');
+            const categories = Array.from(checkboxes).map(cb => cb.value);
+
+            if (categories.length === 0) {
+                alert('Please select at least one newsletter category!');
+                return;
+            }
+
+            const subscription = {
+                id: Date.now().toString(),
+                email: email,
+                name: name,
+                categories: categories,
+                subscribeDate: new Date().toISOString()
+            };
+
+            subscriptions.push(subscription);
+            localStorage.setItem('newsletterSubscriptions', JSON.stringify(subscriptions));
+
+            // If user is logged in, update their preferences
+            if (currentUser) {
+                currentUser.preferences = categories;
+                const userIndex = users.findIndex(u => u.id === currentUser.id);
+                if (userIndex !== -1) {
+                    users[userIndex] = currentUser;
+                    localStorage.setItem('newsletterUsers', JSON.stringify(users));
+                    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                }
+            }
+
+            alert('Successfully subscribed to the newsletter! Thank you for joining NewsWave!');
+            document.getElementById('subscribeForm').reset();
+            
+            if (currentUser) {
+                updateUserPreferences();
+            }
+        }
+
+        // Donation functions
+        function donate(amount) {
+            processDonation(amount);
+        }
+
+        function donateCustom() {
+            const amount = parseFloat(document.getElementById('customAmount').value);
+            if (amount && amount > 0) {
+                processDonation(amount);
+                document.getElementById('customAmount').value = '';
+            } else {
+                alert('Please enter a valid donation amount!');
+            }
+        }
+
+        function processDonation(amount) {
+            // In a real application, this would integrate with PayPal or Stripe
+            const donation = {
+                id: Date.now().toString(),
+                amount: amount,
+                date: new Date().toISOString(),
+                userEmail: currentUser ? currentUser.email : 'anonymous'
+            };
+
+            donations.push(donation);
+            localStorage.setItem('newsletterDonations', JSON.stringify(donations));
+
+            // Simulate PayPal redirect
+            alert(`Thank you for your generous donation of $${amount}! You would normally be redirected to PayPal to complete the payment.`);
+            
+            if (currentUser) {
+                updateDonationHistory();
+            }
+        }
+
+        // Update user preferences display
+        function updateUserPreferences() {
+            if (!currentUser) return;
+            
+            const preferencesDiv = document.getElementById('userPreferences');
+            const userSubs = subscriptions.filter(sub => sub.email === currentUser.email);
+            
+            if (userSubs.length === 0) {
+                preferencesDiv.innerHTML = '<p>No newsletter subscriptions yet. <a href="#newsletter" style="color: #667eea;">Subscribe now!</a></p>';
+            } else {
+                const latestSub = userSubs[userSubs.length - 1];
+                const categoriesHTML = latestSub.categories.map(cat => 
+                    `<span style="background: #667eea; color: white; padding: 0.3rem 0.8rem; border-radius: 15px; margin: 0.2rem; display: inline-block; font-size: 0.9rem;">${cat.replace('-', ' ').toUpperCase()}</span>`
+                ).join('');
+                preferencesDiv.innerHTML = `<p>Subscribed Categories:</p><div style="margin-top: 1rem;">${categoriesHTML}</div>`;
+            }
+        }
+
+        // Update donation history
+        function updateDonationHistory() {
+            if (!currentUser) return;
+            
+            const historyDiv = document.getElementById('donationHistory');
+            const userDonations = donations.filter(donation => donation.userEmail === currentUser.email);
+            
+            if (userDonations.length === 0) {
+                historyDiv.innerHTML = '<p>No donations yet. Thank you for considering supporting us!</p>';
+            } else {
+                const total = userDonations.reduce((sum, donation) => sum + donation.amount, 0);
+                const donationsHTML = userDonations.map(donation => 
+                    `<div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid #eee;">
+                        <span>${donation.amount}</span>
+                        <span style="color: #666; font-size: 0.9rem;">${new Date(donation.date).toLocaleDateString()}</span>
+                    </div>`
+                ).join('');
+                historyDiv.innerHTML = `
+                    <p style="font-weight: bold; color: #667eea; margin-bottom: 1rem;">Total Donated: ${total}</p>
+                    <div>${donationsHTML}</div>
+                `;
+            }
+        }
+
+        // Edit preferences
+        function editPreferences() {
+            alert('This feature would allow you to modify your newsletter preferences. In a full implementation, this would open a modal with checkboxes for different categories.');
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add some interactive animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate cards on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all cards
+            document.querySelectorAll('.newsletter-card, .donation-card, .dashboard-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+        });
+
+        // Add floating animation to hero buttons
+        setInterval(() => {
+            const buttons = document.querySelectorAll('.hero-buttons .btn');
+            buttons.forEach((btn, index) => {
+                setTimeout(() => {
+                    btn.style.transform = 'translateY(-5px)';
+                    setTimeout(() => {
+                        btn.style.transform = 'translateY(0)';
+                    }, 200);
+                }, index * 100);
+            });
+        }, 3000);
+
+        // Add particle effect to hero section (simple version)
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.style.position = 'absolute';
+            particle.style.width = '4px';
+            particle.style.height = '4px';
+            particle.style.background = 'rgba(255, 255, 255, 0.5)';
+            particle.style.borderRadius = '50%';
+            particle.style.pointerEvents = 'none';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = '100%';
+            particle.style.animation = 'floatUp 8s linear infinite';
+            
+            document.querySelector('.hero').appendChild(particle);
+            
+            setTimeout(() => {
+                particle.remove();
+            }, 8000);
+        }
+
+        // Add CSS for particle animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes floatUp {
+                to {
+                    transform: translateY(-100vh);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Create particles periodically
+        setInterval(createParticle, 500);
+
+        // Add success messages with better styling
+        function showSuccessMessage(message) {
+            const successDiv = document.createElement('div');
+            successDiv.style.position = 'fixed';
+            successDiv.style.top = '100px';
+            successDiv.style.right = '20px';
+            successDiv.style.background = 'linear-gradient(45deg, #4ecdc4, #44a08d)';
+            successDiv.style.color = 'white';
+            successDiv.style.padding = '1rem 2rem';
+            successDiv.style.borderRadius = '10px';
+            successDiv.style.boxShadow = '0 5px 15px rgba(0,0,0,0.2)';
+            successDiv.style.zIndex = '9999';
+            successDiv.style.animation = 'slideInRight 0.5s ease';
+            successDiv.textContent = message;
+            
+            document.body.appendChild(successDiv);
+            
+            setTimeout(() => {
+                successDiv.style.animation = 'slideOutRight 0.5s ease';
+                setTimeout(() => {
+                    successDiv.remove();
+                }, 500);
+            }, 3000);
+        }
+
+        // Add CSS for success message animations
+        const successStyle = document.createElement('style');
+        successStyle.textContent = `
+            @keyframes slideInRight {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+            @keyframes slideOutRight {
+                from {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+                to {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(successStyle);
+
+        // Enhanced donation function with PayPal simulation
+        function processDonation(amount) {
+            const donation = {
+                id: Date.now().toString(),
+                amount: amount,
+                date: new Date().toISOString(),
+                userEmail: currentUser ? currentUser.email : 'anonymous'
+            };
+
+            donations.push(donation);
+            localStorage.setItem('newsletterDonations', JSON.stringify(donations));
+
+            // Create a more realistic PayPal simulation
+            const paypalWindow = document.createElement('div');
+            paypalWindow.style.position = 'fixed';
+            paypalWindow.style.top = '50%';
+            paypalWindow.style.left = '50%';
+            paypalWindow.style.transform = 'translate(-50%, -50%)';
+            paypalWindow.style.background = 'white';
+            paypalWindow.style.padding = '2rem';
+            paypalWindow.style.borderRadius = '10px';
+            paypalWindow.style.boxShadow = '0 10px 30px rgba(0,0,0,0.3)';
+            paypalWindow.style.zIndex = '9999';
+            paypalWindow.style.textAlign = 'center';
+            paypalWindow.innerHTML = `
+                <div style="color: #0070ba; font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;">PayPal</div>
+                <p>Redirecting to PayPal...</p>
+                <p style="color: #666; margin: 1rem 0;">Amount: ${amount}</p>
+                <div style="margin: 2rem 0;">
+                    <div style="width: 30px; height: 30px; border: 3px solid #0070ba; border-top: 3px solid transparent; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto;"></div>
+                </div>
+                <button onclick="this.parentElement.remove(); showSuccessMessage('Donation processed successfully! Thank you for your support.')" 
+                        style="background: #0070ba; color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer;">
+                    Complete Payment
+                </button>
+            `;
+            
+            document.body.appendChild(paypalWindow);
+            
+            if (currentUser) {
+                setTimeout(() => {
+                    updateDonationHistory();
+                }, 1000);
+            }
+        }
+
+        // Add spin animation for loading
+        const spinStyle = document.createElement('style');
+        spinStyle.textContent = `
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(spinStyle);
+    </script>
+</body>
+</html>
