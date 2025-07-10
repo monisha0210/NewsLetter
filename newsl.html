@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NewsWave - Professional Newsletter Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .btn-secondary:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 80px;
+            min-height: calc(100vh - 80px);
+            background: white;
+            position: relative;
+        }
+
+        .page {
+            display: none;
+            padding: 4rem 0;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 6rem 0;
+            margin-top: -80px;
+            padding-top: 10rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Newsletter Grid */
+        .newsletter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .newsletter-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .newsletter-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .newsletter-card h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        /* Forms */
+        .form-section {
+            background: #f8f9ff;
+            padding: 3rem 0;
+            border-radius: 20px;
+            margin: 3rem 0;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: auto;
+        }
+
+        /* Project Cards */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-header {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 2rem;
+        }
+
+        .project-body {
+            padding: 2rem;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .tech-tag {
+            background: #e8f2ff;
+            color: #667eea;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Resource Cards */
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .resource-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #667eea;
+        }
+
+        .resource-card h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .resource-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .resource-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .resource-link:hover {
+            color: #764ba2;
+        }
+
+        /* Excel Section */
+        .excel-tools {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .excel-tool {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .excel-tool:hover {
+            transform: translateY(-5px);
+        }
+
+        .excel-tool h3 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .excel-tool p {
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin: 3rem 0;
+        }
+
+        .contact-info {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-icon {
+            background: #667eea;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: #2d3748;
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul li a {
+            color: #a0aec0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: #667eea;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #4a5568;
+            padding-top: 2rem;
+            text-align: center;
+            color: #a0aec0;
+        }
+
+        /* Modals */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .close {
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .close:hover {
+            color: #667eea;
+        }
+
+        /* Section Titles */
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #333;
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .main-content {
+                margin-top: 120px;
+            }
+
+            .hero {
+                margin-top: -120px;
+                padding-top: 12rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .page.active {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        /* Success Message */
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border: 1px solid #c3e6cb;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">NewsWave</div>
+            <ul class="nav-links">
+                <li><a href="#" onclick="showPage('home')">Home</a></li>
+                <li><a href="#" onclick="showPage('newsletter')">Newsletter</a></li>
+                <li><a href="#" onclick="showPage('opensource')">Open Source</a></li>
+                <li><a href="#" onclick="showPage('resources')">Resources</a></li>
+                <li><a href="#" onclick="showPage('excel')">Excel</a></li>
+                <li><a href="#" onclick="showPage('contact')">Contact</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <button class="btn btn-secondary" onclick="openModal('loginModal')">Login</button>
+                <button class="btn btn-primary" onclick="openModal('signupModal')">Sign Up</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Home Page -->
+        <div id="home" class="page active">
+            <section class="hero">
+                <div class="container">
+                    <h1>Welcome to NewsWave</h1>
+                    <p>Your premier destination for quality newsletters, open source projects, and professional resources. Stay informed, stay connected, and stay ahead of the curve.</p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary" onclick="showPage('newsletter')">Explore Newsletters</button>
+                        <button class="btn btn-secondary" onclick="showPage('opensource')">View Projects</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="container" style="padding: 4rem 0;">
+                <h2 class="section-title">What We Offer</h2>
+                <div class="newsletter-grid">
+                    <div class="newsletter-card">
+                        <h3>📧 Premium Newsletters</h3>
+                        <p>Curated content across technology, business, lifestyle, and more. Get insights delivered directly to your inbox.</p>
+                    </div>
+                    <div class="newsletter-card">
+                        <h3>🔧 Open Source Projects</h3>
+                        <p>Contribute to meaningful projects that make a difference. From web tools to data analysis platforms.</p>
+                    </div>
+                    <div class="newsletter-card">
+                        <h3>📚 Learning Resources</h3>
+                        <p>Access our curated collection of tutorials, guides, and educational materials for continuous learning.</p>
+                    </div>
+                    <div class="newsletter-card">
+                        <h3>📊 Excel Templates</h3>
+                        <p>Professional Excel templates and tools to boost your productivity and streamline your workflow.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Newsletter Page -->
+        <div id="newsletter" class="page">
+            <section class="container">
+                <h2 class="section-title">Newsletter Categories</h2>
+                <p class="section-subtitle">Choose from our diverse range of newsletters tailored to your interests and professional needs.</p>
+                
+                <div class="newsletter-grid">
+                    <div class="newsletter-card">
+                        <h3>🔥 Tech Trends</h3>
+                        <p>Stay updated with the latest in AI, blockchain, cloud computing, and emerging technologies. Weekly insights from industry experts.</p>
+                    </div>
+                    <div class="newsletter-card">
+                        <h3>💼 Business Strategy</h3>
+                        <p>Strategic insights, market analysis, and business growth tips from successful entrepreneurs and consultants.</p>
+                    </div>
+                    <div class="newsletter-card">
+                        <h3>🌟 Lifestyle & Wellness</h3>
+                        <p>Tips for work-life balance, productivity hacks, health advice, and personal development strategies.</p>
+                    </div>
+                    <div class="newsletter-card">
+                        <h3>📊 Data & Analytics</h3>
+                        <p>Data science tutorials, visualization techniques, and analytics tools to help you make data-driven decisions.</p>
+                    </div>
+                    <div class="newsletter-card">
+                        <h3>🎨 Design & Creativity</h3>
+                        <p>UI/UX design trends, creative inspiration, and tools for designers and creative professionals.</p>
+                    </div>
+                    <div class="newsletter-card">
+                        <h3>🚀 Startup Insights</h3>
+                        <p>Funding news, startup stories, growth hacking techniques, and entrepreneurship advice.</p>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <div class="container">
+                        <h3 style="text-align: center; margin-bottom: 2rem; color: #667eea;">Subscribe to Our Newsletters</h3>
+                        <form id="subscribeForm" style="max-width: 600px; margin: 0 auto;">
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Newsletter Categories (Select all that apply)</label>
+                                <div class="checkbox-group">
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="tech" name="categories" value="tech">
+                                        <label for="tech">Tech Trends</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="business" name="categories" value="business">
+                                        <label for="business">Business Strategy</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="lifestyle" name="categories" value="lifestyle">
+                                        <label for="lifestyle">Lifestyle & Wellness</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="data" name="categories" value="data">
+                                        <label for="data">Data & Analytics</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="design" name="categories" value="design">
+                                        <label for="design">Design & Creativity</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="startup" name="categories" value="startup">
+                                        <label for="startup">Startup Insights</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="frequency">Frequency</label>
+                                <select id="frequency" name="frequency" required>
+                                    <option value="">Select frequency</option>
+                                    <option value="daily">Daily</option>
+                                    <option value="weekly">Weekly</option>
+                                    <option value="monthly">Monthly</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">Subscribe Now</button>
+                        </form>
+                        <div id="subscribeSuccess" class="success-message">
+                            🎉 Thank you for subscribing! You'll receive a confirmation email shortly.
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Open Source Page -->
+        <div id="opensource" class="page">
+            <section class="container">
+                <h2 class="section-title">Open Source Projects</h2>
+                <p class="section-subtitle">Explore our collection of open source projects and contribute to the developer community.</p>
+                
+                <div class="project-grid">
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3>NewsWave API</h3>
+                            <p>RESTful API for newsletter management and subscription services</p>
+                        </div>
+                        <div class="project-body">
+                            <p>A comprehensive API built with Node.js and Express that handles newsletter subscriptions, user management, and content delivery. Features include rate limiting, authentication, and extensive documentation.</p>
+                            <div class="tech-stack">
+                                <span class="tech-tag">Node.js</span>
+                                <span class="tech-tag">Express</span>
+                                <span class="tech-tag">MongoDB</span>
+                                <span class="tech-tag">JWT</span>
+                            </div>
+                            <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                                <a href="https://github.com/newswave/newswave-api" class="btn btn-primary" target="_blank">View on GitHub</a>
+                                <a href="https://api.newswave.com/docs" class="btn btn-secondary" target="_blank">API Docs</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3>Email Template Builder</h3>
+                            <p>Drag-and-drop email template designer for newsletters</p>
+                        </div>
+                        <div class="project-body">
+                            <p>A React-based visual editor for creating responsive email templates. Includes pre-built components, real-time preview, and export functionality for popular email services.</p>
+                            <div class="tech-stack">
+                                <span class="tech-tag">React</span>
+                                <span class="tech-tag">TypeScript</span>
+                                <span class="tech-tag">Tailwind CSS</span>
+                                <span class="tech-tag">Vite</span>
+                            </div>
+                            <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                                <a href="https://github.com/newswave/email-template-builder" class="btn btn-primary" target="_blank">View on GitHub</a>
+                                <a href="https://templates.newswave.com" class="btn btn-secondary" target="_blank">Live Demo</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3>Analytics Dashboard</h3>
+                            <p>Real-time analytics for newsletter performance tracking</p>
+                        </div>
+                        <div class="project-body">
+                            <p>A comprehensive dashboard built with Vue.js that provides insights into newsletter performance, subscriber engagement, and campaign effectiveness with beautiful visualizations.</p>
+                            <div class="tech-stack">
+                                <span class="tech-tag">Vue.js</span>
+                                <span class="tech-tag">Chart.js</span>
+                                <span class="tech-tag">Vuetify</span>
+                                <span class="tech-tag">Python</span>
+                            </div>
+                            <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                                <a href="https://github.com/newswave/analytics-dashboard" class="btn btn-primary" target="_blank">View on GitHub</a>
+                                <a href="https://analytics.newswave.com" class="btn btn-secondary" target="_blank">Live Demo</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3>Content Aggregator</h3>
+                            <p>AI-powered content curation and summarization tool</p>
+                        </div>
+                        <div class="project-body">
+                            <p>An intelligent content aggregator that uses machine learning to curate and summarize news articles, blog posts, and social media content for newsletter creation.</p>
+                            <div class="tech-stack">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">TensorFlow</span>
+                                <span class="tech-tag">FastAPI</span>
+                                <span class="tech-tag">Redis</span>
+                            </div>
+                            <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                                <a href="https://github.com/newswave/content-aggregator" class="btn btn-primary" target="_blank">View on GitHub</a>
+                                <a href="https://docs.newswave.com/content-aggregator" class="btn btn-secondary" target="_blank">Documentation</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <div class="container">
+                        <h3 style="text-align: center; margin-bottom: 2rem; color: #667eea;">Contribute to Our Projects</h3>
+                        <p style="text-align: center; margin-bottom: 2rem;">Want to contribute? We welcome developers of all skill levels!</p>
+                        <div style="text-align: center;">
+                            <a href="https://github.com/newswave" class="btn btn-primary" target="_blank">🐙 Visit Our GitHub</a>
+                            <a href="https://docs.newswave.com/contributing" class="btn btn-secondary" target="_blank">📚 Contribution Guide</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Resources Page -->
+        <div id="resources" class="page">
+            <section class="container">
+                <h2 class="section-title">Learning Resources</h2>
+                <p class="section-subtitle">Comprehensive resources to enhance your skills and knowledge across various domains.</p>
+                
+                <div class="resource-grid">
+                    <div class="resource-card">
+                        <h3>📚 Programming Tutorials</h3>
+                        <p>Comprehensive tutorials covering modern programming languages and frameworks.</p>
+                        <div class="resource-links">
+                            <a href="https://javascript.info" class="resource-link" target="_blank">🟨 JavaScript Guide</a>
+                            <a href="https://reactjs.org/docs" class="resource-link" target="_blank">⚛️ React Documentation</a>
+                            <a href="https://nodejs.org/en/docs" class="resource-link" target="_blank">🟩 Node.js Docs</a>
+                        </div>
+                    </div>
+
+                    <div class="resource-card">
+                        <h3>🎨 Design Resources</h3>
+                        <p>Tools and resources for UI/UX designers and creative professionals.</p>
+                        <div class="resource-links">
+                            <a href="https://www.figma.com/community" class="resource-link" target="_blank">🎨 Figma Community</a>
+                            <a href="https://material.io/design" class="resource-link" target="_blank">🎯 Material Design</a>
+                            <a href="https://dribbble.com" class="resource-link" target="_blank">🏀 Dribbble</a>
+                        </div>
+                    </div>
+
+                    <div class="resource-card">
+                        <h3>📊 Data Science</h3>
+                        <p>Resources for data analysis, machine learning, and statistical modeling.</p>
+                        <div class="resource-links">
+                            <a href="https://pandas.pydata.org/docs" class="resource-link" target="_blank">🐼 Pandas Docs</a>
+                            <a href="https://scikit-learn.org/stable" class="resource-link" target="_blank">🤖 Scikit-learn</a>
+                            <a href="https://www.kaggle.com/learn" class="resource-link" target="_blank">📈 Kaggle Learn</a>
+                        </div>
+                    </div>
+
+                    <div class="resource-card">
+                        <h3>💼 Business & Marketing</h3>
+                        <p>Resources for entrepreneurs, marketers, and business professionals.</p>
+                        <div class="resource-links">
+                            <a href="https://www.hubspot.com/resources" class="resource-link" target="_blank">🚀 HubSpot Academy</a>
+                            <a href="https://www.google.com/analytics/academy" class="resource-link" target="_blank">📊 Google Analytics</a>
+                            <a href="https://blog.hootsuite.com" class="resource-link" target="_blank">📱 Social Media Guide</a>
+                        </div>
+                    </div>
+
+                    <div class="resource-card">
+                        <h3>🔧 Development Tools</h3>
+                        <p>Essential tools and utilities for developers and technical professionals.</p>
+                        <div class="resource-links">
+                            <a href="https://code.visualstudio.com" class="resource-link" target="_blank">💻 VS Code</a>
+                            <a href="https://git-scm.com/doc" class="resource-link" target="_blank">🌿 Git Documentation</a>
+                            <a href="https://www.postman.com/resources" class="resource-link" target="_blank">📮 Postman Learning</a>
+                        </div>
+                    </div>
+
+                    <div class="resource-card">
+                        <h3>🎓 Online Learning</h3>
+                        <p>Curated list of online courses and educational platforms.</p>
+                        <div class="resource-links">
+                            <a href="https://www.coursera.org" class="resource-link" target="_blank">🎓 Coursera</a>
+                            <a href="https://www.edx.org" class="resource-link" target="_blank">🏛️ edX</a>
+                            <a href="https://www.freecodecamp.org" class="resource-link" target="_blank">💻 freeCodeCamp</a>
+                        </div>
+                    </div>
+
+                    <div class="resource-card">
+                        <h3>📖 Books & Publications</h3>
+                        <p>Recommended books and publications for continuous learning.</p>
+                        <div class="resource-links">
+                            <a href="https://www.oreilly.com" class="resource-link" target="_blank">📚 O'Reilly Media</a>
+                            <a href="https://pragprog.com" class="resource-link" target="_blank">🔧 Pragmatic Programmer</a>
+                            <a href="https://www.manning.com" class="resource-link" target="_blank">📘 Manning Publications</a>
+                        </div>
+                    </div>
+
+                    <div class="resource-card">
+                        <h3>🌐 Web Development</h3>
+                        <p>Resources for front-end and back-end web development.</p>
+                        <div class="resource-links">
+                            <a href="https://developer.mozilla.org" class="resource-link" target="_blank">🌐 MDN Web Docs</a>
+                            <a href="https://css-tricks.com" class="resource-link" target="_blank">🎨 CSS Tricks</a>
+                            <a href="https://www.w3schools.com" class="resource-link" target="_blank">📖 W3Schools</a>
+                        </div>
+                    </div>
+
+                    <div class="resource-card">
+                        <h3>🔒 Cybersecurity</h3>
+                        <p>Security resources and best practices for developers and IT professionals.</p>
+                        <div class="resource-links">
+                            <a href="https://owasp.org" class="resource-link" target="_blank">🛡️ OWASP</a>
+                            <a href="https://www.sans.org/resources" class="resource-link" target="_blank">🔐 SANS Resources</a>
+                            <a href="https://krebsonsecurity.com" class="resource-link" target="_blank">🔍 Krebs on Security</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Excel Page -->
+        <div id="excel" class="page">
+            <section class="container">
+                <h2 class="section-title">Excel Templates & Tools</h2>
+                <p class="section-subtitle">Professional Excel templates and tools to boost your productivity and streamline your workflow.</p>
+                
+                <div class="excel-tools">
+                    <div class="excel-tool">
+                        <h3>📊 Financial Dashboard</h3>
+                        <p>Comprehensive financial tracking and analysis dashboard with automated calculations and charts.</p>
+                        <a href="https://drive.google.com/file/d/1ABC123_financial_dashboard/view" class="btn btn-secondary" target="_blank">Download Template</a>
+                    </div>
+
+                    <div class="excel-tool">
+                        <h3>📈 Project Management</h3>
+                        <p>Complete project tracking system with Gantt charts, task management, and progress monitoring.</p>
+                        <a href="https://drive.google.com/file/d/1XYZ456_project_management/view" class="btn btn-secondary" target="_blank">Download Template</a>
+                    </div>
+
+                    <div class="excel-tool">
+                        <h3>📋 Inventory Tracker</h3>
+                        <p>Advanced inventory management system with low stock alerts and supplier information.</p>
+                        <a href="https://drive.google.com/file/d/1DEF789_inventory_tracker/view" class="btn btn-secondary" target="_blank">Download Template</a>
+                    </div>
+
+                    <div class="excel-tool">
+                        <h3>💰 Budget Planner</h3>
+                        <p>Personal and business budget planning template with expense categorization and analysis.</p>
+                        <a href="https://drive.google.com/file/d/1GHI012_budget_planner/view" class="btn btn-secondary" target="_blank">Download Template</a>
+                    </div>
+
+                    <div class="excel-tool">
+                        <h3>📊 Sales Analytics</h3>
+                        <p>Sales performance dashboard with KPI tracking, forecasting, and trend analysis.</p>
+                        <a href="https://drive.google.com/file/d/1JKL345_sales_analytics/view" class="btn btn-secondary" target="_blank">Download Template</a>
+                    </div>
+
+                    <div class="excel-tool">
+                        <h3>👥 HR Management</h3>
+                        <p>Employee management system with attendance tracking, performance reviews, and payroll.</p>
+                        <a href="https://drive.google.com/file/d/1MNO678_hr_management/view" class="btn btn-secondary" target="_blank">Download Template</a>
+                    </div>
+
+                    <div class="excel-tool">
+                        <h3>📅 Calendar Planner</h3>
+                        <p>Dynamic calendar system with event scheduling, reminders, and color-coded categories.</p>
+                        <a href="https://drive.google.com/file/d/1PQR901_calendar_planner/view" class="btn btn-secondary" target="_blank">Download Template</a>
+                    </div>
+
+                    <div class="excel-tool">
+                        <h3>📊 Data Analysis Toolkit</h3>
+                        <p>Comprehensive data analysis toolkit with pivot tables, charts, and statistical functions.</p>
+                        <a href="https://drive.google.com/file/d/1STU234_data_analysis/view" class="btn btn-secondary" target="_blank">Download Template</a>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <div class="container">
+                        <h3 style="text-align: center; margin-bottom: 2rem; color: #667eea;">Request Custom Excel Template</h3>
+                        <form id="excelRequestForm" style="max-width: 600px; margin: 0 auto;">
+                            <div class="form-group">
+                                <label for="templateName">Template Name</label>
+                                <input type="text" id="templateName" name="templateName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="templateDescription">Description</label>
+                                <textarea id="templateDescription" name="templateDescription" rows="4" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="requestorEmail">Your Email</label>
+                                <input type="email" id="requestorEmail" name="requestorEmail" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="category">Category</label>
+                                <select id="category" name="category" required>
+                                    <option value="">Select category</option>
+                                    <option value="financial">Financial</option>
+                                    <option value="project">Project Management</option>
+                                    <option value="hr">Human Resources</option>
+                                    <option value="marketing">Marketing</option>
+                                    <option value="analytics">Analytics</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Request</button>
+                        </form>
+                        <div id="excelRequestSuccess" class="success-message">
+                            ✅ Your request has been submitted! We'll get back to you within 48 hours.
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Contact Page -->
+        <div id="contact" class="page">
+            <section class="container">
+                <h2 class="section-title">Contact Us</h2>
+                <p class="section-subtitle">Get in touch with our team. We'd love to hear from you!</p>
+                
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <h3 style="color: #667eea; margin-bottom: 2rem;">Get in Touch</h3>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">📧</div>
+                            <div>
+                                <strong>Email</strong>
+                                <p>contact@newswave.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">📱</div>
+                            <div>
+                                <strong>Phone</strong>
+                                <p>+1 (555) 123-4567</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">📍</div>
+                            <div>
+                                <strong>Address</strong>
+                                <p>123 Newsletter Street<br>Digital City, DC 12345</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">🕒</div>
+                            <div>
+                                <strong>Business Hours</strong>
+                                <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 2rem;">
+                            <h4 style="color: #667eea; margin-bottom: 1rem;">Follow Us</h4>
+                            <div style="display: flex; gap: 1rem;">
+                                <a href="https://twitter.com/newswave" class="btn btn-secondary" target="_blank">Twitter</a>
+                                <a href="https://linkedin.com/company/newswave" class="btn btn-secondary" target="_blank">LinkedIn</a>
+                                <a href="https://github.com/newswave" class="btn btn-secondary" target="_blank">GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-info">
+                        <h3 style="color: #667eea; margin-bottom: 2rem;">Send us a Message</h3>
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="contactName">Name</label>
+                                <input type="text" id="contactName" name="contactName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contactEmail">Email</label>
+                                <input type="email" id="contactEmail" name="contactEmail" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <input type="text" id="subject" name="subject" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" name="message" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                        </form>
+                        <div id="contactSuccess" class="success-message">
+                            🎉 Thank you for your message! We'll get back to you soon.
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>NewsWave</h3>
+                    <p>Your premier destination for quality newsletters, open source projects, and professional resources.</p>
+                    <div style="margin-top: 1rem;">
+                        <a href="https://github.com/newswave" style="color: #667eea; margin-right: 1rem;">GitHub</a>
+                        <a href="https://twitter.com/newswave" style="color: #667eea; margin-right: 1rem;">Twitter</a>
+                        <a href="https://linkedin.com/company/newswave" style="color: #667eea;">LinkedIn</a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#" onclick="showPage('home')">Home</a></li>
+                        <li><a href="#" onclick="showPage('newsletter')">Newsletter</a></li>
+                        <li><a href="#" onclick="showPage('opensource')">Open Source</a></li>
+                        <li><a href="#" onclick="showPage('resources')">Resources</a></li>
+                        <li><a href="#" onclick="showPage('excel')">Excel Templates</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#" onclick="showPage('contact')">Contact Us</a></li>
+                        <li><a href="#" onclick="openModal('loginModal')">Login</a></li>
+                        <li><a href="#" onclick="openModal('signupModal')">Sign Up</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to our newsletter for the latest updates and insights.</p>
+                    <div style="margin-top: 1rem;">
+                        <input type="email" placeholder="Enter your email" style="width: 100%; padding: 0.5rem; border: 1px solid #4a5568; border-radius: 5px; margin-bottom: 1rem;">
+                        <button class="btn btn-primary" style="width: 100%;">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 NewsWave. All rights reserved. | Designed with ❤️ for the community</p>
+                <p style="margin-top: 0.5rem;">
+                    <a href="#">Terms of Service</a> | 
+                    <a href="#">Privacy Policy</a> | 
+                    <a href="#">Cookie Policy</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('loginModal')">&times;</span>
+            <h2 style="text-align: center; margin-bottom: 2rem; color: #667eea;">Login</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" name="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" name="loginPassword" required>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <label style="display: flex; align-items: center; gap: 0.5rem;">
+                        <input type="checkbox" id="rememberMe">
+                        <span>Remember me</span>
+                    </label>
+                    <a href="#" style="color: #667eea; text-decoration: none;">Forgot password?</a>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+            </form>
+            <p style="text-align: center; margin-top: 1rem;">
+                Don't have an account? <a href="#" onclick="closeModal('loginModal'); openModal('signupModal')" style="color: #667eea;">Sign up here</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('signupModal')">&times;</span>
+            <h2 style="text-align: center; margin-bottom: 2rem; color: #667eea;">Sign Up</h2>
+            <form id="signupForm">
+                <div class="form-group">
+                    <label for="signupName">Full Name</label>
+                    <input type="text" id="signupName" name="signupName" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" name="signupEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" name="signupPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required>
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label style="display: flex; align-items: center; gap: 0.5rem;">
+                        <input type="checkbox" id="agreeTerms" required>
+                        <span>I agree to the <a href="#" style="color: #667eea;">Terms of Service</a> and <a href="#" style="color: #667eea;">Privacy Policy</a></span>
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Sign Up</button>
+            </form>
+            <p style="text-align: center; margin-top: 1rem;">
+                Already have an account? <a href="#" onclick="closeModal('signupModal'); openModal('loginModal')" style="color: #667eea;">Login here</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Page Navigation
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update URL hash
+            window.location.hash = pageId;
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Modal Functions
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        }
+
+        // Form Handlers
+        document.getElementById('subscribeForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const email = formData.get('email');
+            const name = formData.get('name');
+            const categories = formData.getAll('categories');
+            const frequency = formData.get('frequency');
+            
+            // Simulate API call
+            setTimeout(() => {
+                document.getElementById('subscribeSuccess').classList.add('show');
+                this.reset();
+                
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    document.getElementById('subscribeSuccess').classList.remove('show');
+                }, 5000);
+            }, 1000);
+        });
+
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const name = formData.get('contactName');
+            const email = formData.get('contactEmail');
+            const subject = formData.get('subject');
+            const message = formData.get('message');
+            
+            // Simulate API call
+            setTimeout(() => {
+                document.getElementById('contactSuccess').classList.add('show');
+                this.reset();
+                
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    document.getElementById('contactSuccess').classList.remove('show');
+                }, 5000);
+            }, 1000);
+        });
+
+        document.getElementById('excelRequestForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const templateName = formData.get('templateName');
+            const description = formData.get('templateDescription');
+            const email = formData.get('requestorEmail');
+            const category = formData.get('category');
+            
+            // Simulate API call
+            setTimeout(() => {
+                document.getElementById('excelRequestSuccess').classList.add('show');
+                this.reset();
+                
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    document.getElementById('excelRequestSuccess').classList.remove('show');
+                }, 5000);
+            }, 1000);
+        });
+
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const email = formData.get('loginEmail');
+            const password = formData.get('loginPassword');
+            
+            // Simulate login
+            setTimeout(() => {
+                alert('Login successful! Welcome back.');
+                closeModal('loginModal');
+                this.reset();
+            }, 1000);
+        });
+
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const name = formData.get('signupName');
+            const email = formData.get('signupEmail');
+            const password = formData.get('signupPassword');
+            const confirmPassword = formData.get('confirmPassword');
+            
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+            
+            // Simulate signup
+            setTimeout(() => {
+                alert('Account created successfully! Please check your email for verification.');
+                closeModal('signupModal');
+                this.reset();
+            }, 1000);
+        });
+
+        // Initialize page based on URL hash
+        window.addEventListener('load', function() {
+            const hash = window.location.hash.substring(1);
+            if (hash && document.getElementById(hash)) {
+                showPage(hash);
+            }
+        });
+
+        // Handle browser back/forward buttons
+        window.addEventListener('hashchange', function() {
+            const hash = window.location.hash.substring(1);
+            if (hash && document.getElementById(hash)) {
+                showPage(hash);
+            } else {
+                showPage('home');
+            }
+        });
+
+        // Smooth scrolling for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Add loading animation to buttons
+        document.querySelectorAll('button[type="submit"]').forEach(button => {
+            button.addEventListener('click', function() {
+                const originalText = this.textContent;
+                this.textContent = 'Processing...';
+                this.disabled = true;
+                
+                setTimeout(() => {
+                    this.textContent = originalText;
+                    this.disabled = false;
+                }, 2000);
+            });
+        });
+    </script>
+</body>
+</html>
