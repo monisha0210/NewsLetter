@@ -6,240 +6,655 @@
     <title>Newsletter Pro - Stay Informed</title>
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
-<body class="logged-out">
+<body>
     <!-- Header -->
     <header class="header">
         <nav class="nav">
-            <div class="logo">NewsLetter</div>
+            <div class="logo">NewsWave</div>
             <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#newsletter">Newsletter</a></li>
-                <li><a href="#donate">Donate</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#" onclick="showPage('home')">Home</a></li>
+                <li><a href="#" onclick="showPage('newsletter')">Newsletter</a></li>
+                <li><a href="#" onclick="showPage('opensource')">Open Source</a></li>
+                <li><a href="#" onclick="showPage('resources')">Resources</a></li>
+                <li><a href="#" onclick="showPage('excel')">Excel</a></li>
+                <li><a href="#" onclick="showPage('contact')">Contact</a></li>
             </ul>
             <div class="auth-buttons">
-                <button class="btn btn-secondary login-btn" onclick="openModal('loginModal')">Login</button>
-                <button class="btn btn-primary register-btn" onclick="openModal('registerModal')">Sign Up</button>
-                <button class="btn btn-secondary logout-btn" onclick="logout()" style="display: none;">Logout</button>
+                <button class="btn btn-secondary" onclick="openModal('loginModal')">Login</button>
+                <button class="btn btn-primary" onclick="openModal('signupModal')">Sign Up</button>
             </div>
         </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <h1>Stay Informed, Stay Connected</h1>
-            <p>Get the latest news, insights, and updates delivered straight to your inbox. Join thousands of readers who trust NewsWave for quality content.</p>
-            <div class="hero-buttons">
-                <button class="btn btn-primary" onclick="document.getElementById('newsletter').scrollIntoView()">Subscribe Now</button>
-                <button class="btn btn-secondary" onclick="document.getElementById('donate').scrollIntoView()">Support Us</button>
-            </div>
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Home Page -->
+        <div id="home" class="page active">
+            <section class="hero">
+                <div class="container">
+                    <h1>Welcome to NewsWave</h1>
+                    <p>Your premier destination for quality newsletters, open source projects, and professional resources. Stay informed, stay connected, and stay ahead of the curve.</p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary" onclick="showPage('newsletter')">Explore Newsletters</button>
+                        <button class="btn btn-secondary" onclick="showPage('opensource')">View Projects</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="container" style="padding: 4rem 0;">
+                <h2 class="section-title">What We Offer</h2>
+                <div class="newsletter-grid">
+                    <div class="newsletter-card">
+                        <h3>📧 Premium Newsletters</h3>
+                        <p>Curated content across technology, business, lifestyle, and more. Get insights delivered directly to your inbox.</p>
+                    </div>
+                    <div class="newsletter-card">
+                        <h3>🔧 Open Source Projects</h3>
+                        <p>Contribute to meaningful projects that make a difference. From web tools to data analysis platforms.</p>
+                    </div>
+                    <div class="newsletter-card">
+                        <h3>📚 Learning Resources</h3>
+                        <p>Access our curated collection of tutorials, guides, and educational materials for continuous learning.</p>
+                    </div>
+                    <div class="newsletter-card">
+                        <h3>📊 Excel Templates</h3>
+                        <p>Professional Excel templates and tools to boost your productivity and streamline your workflow.</p>
+                    </div>
+                </div>
+            </section>
         </div>
-    </section>
 
-    <!-- Newsletter Section -->
-    <section class="newsletter-section" id="newsletter">
-        <div class="container">
-            <h2 class="section-title">Our Newsletter Categories</h2>
-            
-            <div class="newsletter-grid">
-                <div class="newsletter-card">
-                    <h3>📰 Daily News</h3>
-                    <p>Stay updated with the latest breaking news and current events from around the world.</p>
+        <!-- Newsletter Page -->
+        <div id="newsletter" class="page">
+            <section class="container">
+                <h2 class="section-title">Newsletter Categories</h2>
+                <p class="section-subtitle">Choose from our diverse range of newsletters tailored to your interests and professional needs.</p>
+                
+                <div class="newsletter-grid">
+                    <div class="newsletter-card">
+                        <h3>🔥 Tech Trends</h3>
+                        <p>Stay updated with the latest in AI, blockchain, cloud computing, and emerging technologies. Weekly insights from industry experts.</p>
+                    </div>
+                    <div class="newsletter-card">
+                        <h3>💼 Business Strategy</h3>
+                        <p>Strategic insights, market analysis, and business growth tips from successful entrepreneurs and consultants.</p>
+                    </div>
+                    <div class="newsletter-card">
+                        <h3>🌟 Lifestyle & Wellness</h3>
+                        <p>Tips for work-life balance, productivity hacks, health advice, and personal development strategies.</p>
+                    </div>
+                    <div class="newsletter-card">
+                        <h3>📊 Data & Analytics</h3>
+                        <p>Data science tutorials, visualization techniques, and analytics tools to help you make data-driven decisions.</p>
+                    </div>
+                    <div class="newsletter-card">
+                        <h3>🎨 Design & Creativity</h3>
+                        <p>UI/UX design trends, creative inspiration, and tools for designers and creative professionals.</p>
+                    </div>
+                    <div class="newsletter-card">
+                        <h3>🚀 Startup Insights</h3>
+                        <p>Funding news, startup stories, growth hacking techniques, and entrepreneurship advice.</p>
+                    </div>
                 </div>
-                <div class="newsletter-card">
-                    <h3>💼 Business Insights</h3>
-                    <p>Get expert analysis on market trends, startup stories, and business opportunities.</p>
-                </div>
-                <div class="newsletter-card">
-                    <h3>🔬 Tech Updates</h3>
-                    <p>Discover the latest in technology, innovation, and digital transformation.</p>
-                </div>
-                <div class="newsletter-card">
-                    <h3>🎨 Lifestyle & Culture</h3>
-                    <p>Explore art, culture, wellness, and lifestyle trends that matter to you.</p>
-                </div>
-            </div>
 
-            <div class="subscribe-form">
-                <h3 style="text-align: center; margin-bottom: 2rem; color: #667eea;">Subscribe to Our Newsletter</h3>
-                <form id="subscribeForm" onsubmit="subscribe(event)">
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="name">Full Name</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Newsletter Categories (Select all that apply)</label>
-                        <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 0.5rem;">
-                            <label style="display: flex; align-items: center; font-weight: normal;">
-                                <input type="checkbox" name="categories" value="daily-news" style="margin-right: 0.5rem;">
-                                Daily News
-                            </label>
-                            <label style="display: flex; align-items: center; font-weight: normal;">
-                                <input type="checkbox" name="categories" value="business" style="margin-right: 0.5rem;">
-                                Business
-                            </label>
-                            <label style="display: flex; align-items: center; font-weight: normal;">
-                                <input type="checkbox" name="categories" value="tech" style="margin-right: 0.5rem;">
-                                Technology
-                            </label>
-                            <label style="display: flex; align-items: center; font-weight: normal;">
-                                <input type="checkbox" name="categories" value="lifestyle" style="margin-right: 0.5rem;">
-                                Lifestyle
-                            </label>
+                <div class="form-section">
+                    <div class="container">
+                        <h3 style="text-align: center; margin-bottom: 2rem; color: #667eea;">Subscribe to Our Newsletters</h3>
+                        <form id="subscribeForm" style="max-width: 600px; margin: 0 auto;">
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Newsletter Categories (Select all that apply)</label>
+                                <div class="checkbox-group">
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="tech" name="categories" value="tech">
+                                        <label for="tech">Tech Trends</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="business" name="categories" value="business">
+                                        <label for="business">Business Strategy</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="lifestyle" name="categories" value="lifestyle">
+                                        <label for="lifestyle">Lifestyle & Wellness</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="data" name="categories" value="data">
+                                        <label for="data">Data & Analytics</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="design" name="categories" value="design">
+                                        <label for="design">Design & Creativity</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="startup" name="categories" value="startup">
+                                        <label for="startup">Startup Insights</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="frequency">Frequency</label>
+                                <select id="frequency" name="frequency" required>
+                                    <option value="">Select frequency</option>
+                                    <option value="daily">Daily</option>
+                                    <option value="weekly">Weekly</option>
+                                    <option value="monthly">Monthly</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">Subscribe Now</button>
+                        </form>
+                        <div id="subscribeSuccess" class="success-message">
+                            🎉 Thank you for subscribing! You'll receive a confirmation email shortly.
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
-                        Subscribe Now
-                    </button>
-                </form>
-            </div>
+                </div>
+            </section>
         </div>
-    </section>
 
-    <!-- Donation Section -->
-    <section class="donation-section" id="donate">
+        <!-- Open Source Page -->
+        <div id="opensource" class="page">
+            <section class="container">
+                <h2 class="section-title">Open Source Projects</h2>
+                <p class="section-subtitle">Explore our collection of open source projects and contribute to the developer community.</p>
+                
+                <div class="project-grid">
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3>NewsWave API</h3>
+                            <p>RESTful API for newsletter management and subscription services</p>
+                        </div>
+                        <div class="project-body">
+                            <p>A comprehensive API built with Node.js and Express that handles newsletter subscriptions, user management, and content delivery. Features include rate limiting, authentication, and extensive documentation.</p>
+                            <div class="tech-stack">
+                                <span class="tech-tag">Node.js</span>
+                                <span class="tech-tag">Express</span>
+                                <span class="tech-tag">MongoDB</span>
+                                <span class="tech-tag">JWT</span>
+                            </div>
+                            <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                                <a href="https://github.com/newswave/newswave-api" class="btn btn-primary" target="_blank">View on GitHub</a>
+                                <a href="https://api.newswave.com/docs" class="btn btn-secondary" target="_blank">API Docs</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3>Email Template Builder</h3>
+                            <p>Drag-and-drop email template designer for newsletters</p>
+                        </div>
+                        <div class="project-body">
+                            <p>A React-based visual editor for creating responsive email templates. Includes pre-built components, real-time preview, and export functionality for popular email services.</p>
+                            <div class="tech-stack">
+                                <span class="tech-tag">React</span>
+                                <span class="tech-tag">TypeScript</span>
+                                <span class="tech-tag">Tailwind CSS</span>
+                                <span class="tech-tag">Vite</span>
+                            </div>
+                            <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                                <a href="https://github.com/newswave/email-template-builder" class="btn btn-primary" target="_blank">View on GitHub</a>
+                                <a href="https://templates.newswave.com" class="btn btn-secondary" target="_blank">Live Demo</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3>Analytics Dashboard</h3>
+                            <p>Real-time analytics for newsletter performance tracking</p>
+                        </div>
+                        <div class="project-body">
+                            <p>A comprehensive dashboard built with Vue.js that provides insights into newsletter performance, subscriber engagement, and campaign effectiveness with beautiful visualizations.</p>
+                            <div class="tech-stack">
+                                <span class="tech-tag">Vue.js</span>
+                                <span class="tech-tag">Chart.js</span>
+                                <span class="tech-tag">Vuetify</span>
+                                <span class="tech-tag">Python</span>
+                            </div>
+                            <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                                <a href="https://github.com/newswave/analytics-dashboard" class="btn btn-primary" target="_blank">View on GitHub</a>
+                                <a href="https://analytics.newswave.com" class="btn btn-secondary" target="_blank">Live Demo</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3>Content Aggregator</h3>
+                            <p>AI-powered content curation and summarization tool</p>
+                        </div>
+                        <div class="project-body">
+                            <p>An intelligent content aggregator that uses machine learning to curate and summarize news articles, blog posts, and social media content for newsletter creation.</p>
+                            <div class="tech-stack">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">TensorFlow</span>
+                                <span class="tech-tag">FastAPI</span>
+                                <span class="tech-tag">Redis</span>
+                            </div>
+                            <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                                <a href="https://github.com/newswave/content-aggregator" class="btn btn-primary" target="_blank">View on GitHub</a>
+                                <a href="https://docs.newswave.com/content-aggregator" class="btn btn-secondary" target="_blank">Documentation</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <div class="container">
+                        <h3 style="text-align: center; margin-bottom: 2rem; color: #667eea;">Contribute to Our Projects</h3>
+                        <p style="text-align: center; margin-bottom: 2rem;">Want to contribute? We welcome developers of all skill levels!</p>
+                        <div style="text-align: center;">
+                            <a href="https://github.com/newswave" class="btn btn-primary" target="_blank">🐙 Visit Our GitHub</a>
+                            <a href="https://docs.newswave.com/contributing" class="btn btn-secondary" target="_blank">📚 Contribution Guide</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Resources Page -->
+        <div id="resources" class="page">
+            <section class="container">
+                <h2 class="section-title">Learning Resources</h2>
+                <p class="section-subtitle">Comprehensive resources to enhance your skills and knowledge across various domains.</p>
+                
+                <div class="resource-grid">
+                    <div class="resource-card">
+                        <h3>📚 Programming Tutorials</h3>
+                        <p>Comprehensive tutorials covering modern programming languages and frameworks.</p>
+                        <div class="resource-links">
+                            <a href="https://javascript.info" class="resource-link" target="_blank">🟨 JavaScript Guide</a>
+                            <a href="https://reactjs.org/docs" class="resource-link" target="_blank">⚛️ React Documentation</a>
+                            <a href="https://nodejs.org/en/docs" class="resource-link" target="_blank">🟩 Node.js Docs</a>
+                        </div>
+                    </div>
+
+                    <div class="resource-card">
+                        <h3>🎨 Design Resources</h3>
+                        <p>Tools and resources for UI/UX designers and creative professionals.</p>
+                        <div class="resource-links">
+                            <a href="https://www.figma.com/community" class="resource-link" target="_blank">🎨 Figma Community</a>
+                            <a href="https://material.io/design" class="resource-link" target="_blank">🎯 Material Design</a>
+                            <a href="https://dribbble.com" class="resource-link" target="_blank">🏀 Dribbble</a>
+                        </div>
+                    </div>
+
+                    <div class="resource-card">
+                        <h3>📊 Data Science</h3>
+                        <p>Resources for data analysis, machine learning, and statistical modeling.</p>
+                        <div class="resource-links">
+                            <a href="https://pandas.pydata.org/docs" class="resource-link" target="_blank">🐼 Pandas Docs</a>
+                            <a href="https://scikit-learn.org/stable" class="resource-link" target="_blank">🤖 Scikit-learn</a>
+                            <a href="https://www.kaggle.com/learn" class="resource-link" target="_blank">📈 Kaggle Learn</a>
+                        </div>
+                    </div>
+
+                    <div class="resource-card">
+                        <h3>💼 Business & Marketing</h3>
+                        <p>Resources for entrepreneurs, marketers, and business professionals.</p>
+                        <div class="resource-links">
+                            <a href="https://www.hubspot.com/resources" class="resource-link" target="_blank">🚀 HubSpot Academy</a>
+                            <a href="https://www.google.com/analytics/academy" class="resource-link" target="_blank">📊 Google Analytics</a>
+                            <a href="https://blog.hootsuite.com" class="resource-link" target="_blank">📱 Social Media Guide</a>
+                        </div>
+                    </div>
+
+                    <div class="resource-card">
+                        <h3>🔧 Development Tools</h3>
+                        <p>Essential tools and utilities for developers and technical professionals.</p>
+                        <div class="resource-links">
+                            <a href="https://code.visualstudio.com" class="resource-link" target="_blank">💻 VS Code</a>
+                            <a href="https://git-scm.com/doc" class="resource-link" target="_blank">🌿 Git Documentation</a>
+                            <a href="https://www.postman.com/resources" class="resource-link" target="_blank">📮 Postman Learning</a>
+                        </div>
+                    </div>
+
+                    <div class="resource-card">
+                        <h3>🎓 Online Learning</h3>
+                        <p>Curated list of online courses and educational platforms.</p>
+                        <div class="resource-links">
+                            <a href="https://www.coursera.org" class="resource-link" target="_blank">🎓 Coursera</a>
+                            <a href="https://www.edx.org" class="resource-link" target="_blank">🏛️ edX</a>
+                            <a href="https://www.freecodecamp.org" class="resource-link" target="_blank">💻 freeCodeCamp</a>
+                        </div>
+                    </div>
+
+                    <div class="resource-card">
+                        <h3>📖 Books & Publications</h3>
+                        <p>Recommended books and publications for continuous learning.</p>
+                        <div class="resource-links">
+                            <a href="https://www.oreilly.com" class="resource-link" target="_blank">📚 O'Reilly Media</a>
+                            <a href="https://pragprog.com" class="resource-link" target="_blank">🔧 Pragmatic Programmer</a>
+                            <a href="https://www.manning.com" class="resource-link" target="_blank">📘 Manning Publications</a>
+                        </div>
+                    </div>
+
+                    <div class="resource-card">
+                        <h3>🌐 Web Development</h3>
+                        <p>Resources for front-end and back-end web development.</p>
+                        <div class="resource-links">
+                            <a href="https://developer.mozilla.org" class="resource-link" target="_blank">🌐 MDN Web Docs</a>
+                            <a href="https://css-tricks.com" class="resource-link" target="_blank">🎨 CSS Tricks</a>
+                            <a href="https://www.w3schools.com" class="resource-link" target="_blank">📖 W3Schools</a>
+                        </div>
+                    </div>
+
+                    <div class="resource-card">
+                        <h3>🔒 Cybersecurity</h3>
+                        <p>Security resources and best practices for developers and IT professionals.</p>
+                        <div class="resource-links">
+                            <a href="https://owasp.org" class="resource-link" target="_blank">🛡️ OWASP</a>
+                            <a href="https://www.sans.org/resources" class="resource-link" target="_blank">🔐 SANS Resources</a>
+                            <a href="https://krebsonsecurity.com" class="resource-link" target="_blank">🔍 Krebs on Security</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Excel Page -->
+        <div id="excel" class="page">
+            <section class="container">
+                <h2 class="section-title">Excel Templates & Tools</h2>
+                <p class="section-subtitle">Professional Excel templates and tools to boost your productivity and streamline your workflow.</p>
+                
+                <div class="excel-tools">
+                    <div class="excel-tool">
+                        <h3>📊 Financial Dashboard</h3>
+                        <p>Comprehensive financial tracking and analysis dashboard with automated calculations and charts.</p>
+                        <a href="https://drive.google.com/file/d/1ABC123_financial_dashboard/view" class="btn btn-secondary" target="_blank">Download Template</a>
+                    </div>
+
+                    <div class="excel-tool">
+                        <h3>📈 Project Management</h3>
+                        <p>Complete project tracking system with Gantt charts, task management, and progress monitoring.</p>
+                        <a href="https://drive.google.com/file/d/1XYZ456_project_management/view" class="btn btn-secondary" target="_blank">Download Template</a>
+                    </div>
+
+                    <div class="excel-tool">
+                        <h3>📋 Inventory Tracker</h3>
+                        <p>Advanced inventory management system with low stock alerts and supplier information.</p>
+                        <a href="https://drive.google.com/file/d/1DEF789_inventory_tracker/view" class="btn btn-secondary" target="_blank">Download Template</a>
+                    </div>
+
+                    <div class="excel-tool">
+                        <h3>💰 Budget Planner</h3>
+                        <p>Personal and business budget planning template with expense categorization and analysis.</p>
+                        <a href="https://drive.google.com/file/d/1GHI012_budget_planner/view" class="btn btn-secondary" target="_blank">Download Template</a>
+                    </div>
+
+                    <div class="excel-tool">
+                        <h3>📊 Sales Analytics</h3>
+                        <p>Sales performance dashboard with KPI tracking, forecasting, and trend analysis.</p>
+                        <a href="https://drive.google.com/file/d/1JKL345_sales_analytics/view" class="btn btn-secondary" target="_blank">Download Template</a>
+                    </div>
+
+                    <div class="excel-tool">
+                        <h3>👥 HR Management</h3>
+                        <p>Employee management system with attendance tracking, performance reviews, and payroll.</p>
+                        <a href="https://drive.google.com/file/d/1MNO678_hr_management/view" class="btn btn-secondary" target="_blank">Download Template</a>
+                    </div>
+
+                    <div class="excel-tool">
+                        <h3>📅 Calendar Planner</h3>
+                        <p>Dynamic calendar system with event scheduling, reminders, and color-coded categories.</p>
+                        <a href="https://drive.google.com/file/d/1PQR901_calendar_planner/view" class="btn btn-secondary" target="_blank">Download Template</a>
+                    </div>
+
+                    <div class="excel-tool">
+                        <h3>📊 Data Analysis Toolkit</h3>
+                        <p>Comprehensive data analysis toolkit with pivot tables, charts, and statistical functions.</p>
+                        <a href="https://drive.google.com/file/d/1STU234_data_analysis/view" class="btn btn-secondary" target="_blank">Download Template</a>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <div class="container">
+                        <h3 style="text-align: center; margin-bottom: 2rem; color: #667eea;">Request Custom Excel Template</h3>
+                        <form id="excelRequestForm" style="max-width: 600px; margin: 0 auto;">
+                            <div class="form-group">
+                                <label for="templateName">Template Name</label>
+                                <input type="text" id="templateName" name="templateName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="templateDescription">Description</label>
+                                <textarea id="templateDescription" name="templateDescription" rows="4" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="requestorEmail">Your Email</label>
+                                <input type="email" id="requestorEmail" name="requestorEmail" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="category">Category</label>
+                                <select id="category" name="category" required>
+                                    <option value="">Select category</option>
+                                    <option value="financial">Financial</option>
+                                    <option value="project">Project Management</option>
+                                    <option value="hr">Human Resources</option>
+                                    <option value="marketing">Marketing</option>
+                                    <option value="analytics">Analytics</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Request</button>
+                        </form>
+                        <div id="excelRequestSuccess" class="success-message">
+                            ✅ Your request has been submitted! We'll get back to you within 48 hours.
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Contact Page -->
+        <div id="contact" class="page">
+            <section class="container">
+                <h2 class="section-title">Contact Us</h2>
+                <p class="section-subtitle">Get in touch with our team. We'd love to hear from you!</p>
+                
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <h3 style="color: #667eea; margin-bottom: 2rem;">Get in Touch</h3>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">📧</div>
+                            <div>
+                                <strong>Email</strong>
+                                <p>contact@newswave.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">📱</div>
+                            <div>
+                                <strong>Phone</strong>
+                                <p>+1 (555) 123-4567</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">📍</div>
+                            <div>
+                                <strong>Address</strong>
+                                <p>123 Newsletter Street<br>Digital City, DC 12345</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">🕒</div>
+                            <div>
+                                <strong>Business Hours</strong>
+                                <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 2rem;">
+                            <h4 style="color: #667eea; margin-bottom: 1rem;">Follow Us</h4>
+                            <div style="display: flex; gap: 1rem;">
+                                <a href="https://twitter.com/newswave" class="btn btn-secondary" target="_blank">Twitter</a>
+                                <a href="https://linkedin.com/company/newswave" class="btn btn-secondary" target="_blank">LinkedIn</a>
+                                <a href="https://github.com/newswave" class="btn btn-secondary" target="_blank">GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-info">
+                        <h3 style="color: #667eea; margin-bottom: 2rem;">Send us a Message</h3>
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="contactName">Name</label>
+                                <input type="text" id="contactName" name="contactName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contactEmail">Email</label>
+                                <input type="email" id="contactEmail" name="contactEmail" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <input type="text" id="subject" name="subject" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" name="message" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                        </form>
+                        <div id="contactSuccess" class="success-message">
+                            🎉 Thank you for your message! We'll get back to you soon.
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
         <div class="container">
-            <h2 class="section-title">Support Quality Journalism</h2>
-            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem; color: #666;">
-                Your support helps us continue delivering high-quality, independent journalism. Choose your contribution level:
-            </p>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>NewsWave</h3>
+                    <p>Your premier destination for quality newsletters, open source projects, and professional resources.</p>
+                    <div style="margin-top: 1rem;">
+                        <a href="https://github.com/newswave" style="color: #667eea; margin-right: 1rem;">GitHub</a>
+                        <a href="https://twitter.com/newswave" style="color: #667eea; margin-right: 1rem;">Twitter</a>
+                        <a href="https://linkedin.com/company/newswave" style="color: #667eea;">LinkedIn</a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#" onclick="showPage('home')">Home</a></li>
+                        <li><a href="#" onclick="showPage('newsletter')">Newsletter</a></li>
+                        <li><a href="#" onclick="showPage('opensource')">Open Source</a></li>
+                        <li><a href="#" onclick="showPage('resources')">Resources</a></li>
+                        <li><a href="#" onclick="showPage('excel')">Excel Templates</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#" onclick="showPage('contact')">Contact Us</a></li>
+                        <li><a href="#" onclick="openModal('loginModal')">Login</a></li>
+                        <li><a href="#" onclick="openModal('signupModal')">Sign Up</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to our newsletter for the latest updates and insights.</p>
+                    <div style="margin-top: 1rem;">
+                        <input type="email" placeholder="Enter your email" style="width: 100%; padding: 0.5rem; border: 1px solid #4a5568; border-radius: 5px; margin-bottom: 1rem;">
+                        <button class="btn btn-primary" style="width: 100%;">Subscribe</button>
+                    </div>
+                </div>
+            </div>
             
-            <div class="donation-cards">
-                <div class="donation-card">
-                    <div class="donation-amount">$5</div>
-                    <p>Coffee Supporter</p>
-                    <p style="color: #666; margin: 1rem 0;">Help us stay caffeinated while we write!</p>
-                    <button class="btn btn-primary" onclick="donate(5)">Donate $5</button>
-                </div>
-                <div class="donation-card">
-                    <div class="donation-amount">$15</div>
-                    <p>Newsletter Friend</p>
-                    <p style="color: #666; margin: 1rem 0;">Support our monthly newsletter production</p>
-                    <button class="btn btn-primary" onclick="donate(15)">Donate $15</button>
-                </div>
-                <div class="donation-card">
-                    <div class="donation-amount">$50</div>
-                    <p>Journalism Champion</p>
-                    <p style="color: #666; margin: 1rem 0;">Make a significant impact on our reporting</p>
-                    <button class="btn btn-primary" onclick="donate(50)">Donate $50</button>
-                </div>
-                <div class="donation-card">
-                    <div class="donation-amount">Custom</div>
-                    <p>Your Choice</p>
-                    <p style="color: #666; margin: 1rem 0;">Enter any amount you'd like to contribute</p>
-                    <input type="number" id="customAmount" placeholder="Enter amount" style="width: 100%; padding: 0.5rem; margin: 1rem 0; border: 2px solid #e0e0e0; border-radius: 5px;">
-                    <button class="btn btn-primary" onclick="donateCustom()">Donate</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- User Dashboard (Hidden by default) -->
-    <section class="dashboard" id="dashboard">
-        <div class="container">
-            <div class="dashboard-header">
-                <h2 class="section-title">Welcome to Your Dashboard</h2>
-                <p style="text-align: center; font-size: 1.2rem; color: #666;">
-                    Manage your newsletter preferences and account settings
+            <div class="footer-bottom">
+                <p>&copy; 2025 NewsWave. All rights reserved. | Designed with ❤️ for the community</p>
+                <p style="margin-top: 0.5rem;">
+                    <a href="#">Terms of Service</a> | 
+                    <a href="#">Privacy Policy</a> | 
+                    <a href="#">Cookie Policy</a>
                 </p>
             </div>
-            
-            <div class="dashboard-grid">
-                <div class="dashboard-card user-info">
-                    <div class="user-avatar" id="userAvatar">U</div>
-                    <h3 id="userName">User Name</h3>
-                    <p id="userEmail">user@example.com</p>
-                    <p style="color: #666; margin-top: 1rem;">Member Since: <span id="memberSince">Today</span></p>
-                </div>
-                
-                <div class="dashboard-card">
-                    <h3 style="color: #667eea; margin-bottom: 1rem;">Newsletter Preferences</h3>
-                    <div id="userPreferences">
-                        <p>Loading preferences...</p>
-                    </div>
-                    <button class="btn btn-primary" style="margin-top: 1rem;" onclick="editPreferences()">
-                        Edit Preferences
-                    </button>
-                </div>
-                
-                <div class="dashboard-card">
-                    <h3 style="color: #667eea; margin-bottom: 1rem;">Donation History</h3>
-                    <div id="donationHistory">
-                        <p>No donations yet. Thank you for considering supporting us!</p>
-                    </div>
-                    <button class="btn btn-secondary" style="margin-top: 1rem;" onclick="document.getElementById('donate').scrollIntoView()">
-                        Make a Donation
-                    </button>
-                </div>
-            </div>
         </div>
-    </section>
+    </footer>
 
     <!-- Login Modal -->
     <div id="loginModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('loginModal')">&times;</span>
             <h2 style="text-align: center; margin-bottom: 2rem; color: #667eea;">Login</h2>
-            <form id="loginForm" onsubmit="login(event)">
+            <form id="loginForm">
                 <div class="form-group">
                     <label for="loginEmail">Email</label>
-                    <input type="email" id="loginEmail" required>
+                    <input type="email" id="loginEmail" name="loginEmail" required>
                 </div>
                 <div class="form-group">
                     <label for="loginPassword">Password</label>
-                    <input type="password" id="loginPassword" required>
+                    <input type="password" id="loginPassword" name="loginPassword" required>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <label style="display: flex; align-items: center; gap: 0.5rem;">
+                        <input type="checkbox" id="rememberMe">
+                        <span>Remember me</span>
+                    </label>
+                    <a href="#" style="color: #667eea; text-decoration: none;">Forgot password?</a>
                 </div>
                 <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
             </form>
             <p style="text-align: center; margin-top: 1rem;">
-                Don't have an account? <a href="#" onclick="closeModal('loginModal'); openModal('registerModal')" style="color: #667eea;">Sign up here</a>
+                Don't have an account? <a href="#" onclick="closeModal('loginModal'); openModal('signupModal')" style="color: #667eea;">Sign up here</a>
             </p>
         </div>
     </div>
 
-    <!-- Register Modal -->
-    <div id="registerModal" class="modal">
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeModal('registerModal')">&times;</span>
+            <span class="close" onclick="closeModal('signupModal')">&times;</span>
             <h2 style="text-align: center; margin-bottom: 2rem; color: #667eea;">Sign Up</h2>
-            <form id="registerForm" onsubmit="register(event)">
+            <form id="signupForm">
                 <div class="form-group">
-                    <label for="registerName">Full Name</label>
-                    <input type="text" id="registerName" required>
+                    <label for="signupName">Full Name</label>
+                    <input type="text" id="signupName" name="signupName" required>
                 </div>
                 <div class="form-group">
-                    <label for="registerEmail">Email</label>
-                    <input type="email" id="registerEmail" required>
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" name="signupEmail" required>
                 </div>
                 <div class="form-group">
-                    <label for="registerPassword">Password</label>
-                    <input type="password" id="registerPassword" required>
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" name="signupPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required>
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label style="display: flex; align-items: center; gap: 0.5rem;">
+                        <input type="checkbox" id="agreeTerms" required>
+                        <span>I agree to the <a href="#" style="color: #667eea;">Terms of Service</a> and <a href="#" style="color: #667eea;">Privacy Policy</a></span>
+                    </label>
                 </div>
                 <button type="submit" class="btn btn-primary" style="width: 100%;">Sign Up</button>
             </form>
             <p style="text-align: center; margin-top: 1rem;">
-                Already have an account? <a href="#" onclick="closeModal('registerModal'); openModal('loginModal')" style="color: #667eea;">Login here</a>
+                Already have an account? <a href="#" onclick="closeModal('signupModal'); openModal('loginModal')" style="color: #667eea;">Login here</a>
             </p>
         </div>
     </div>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 NewsWave. All rights reserved.</p>
-            <p style="margin-top: 1rem; opacity: 0.8;">
-                Stay connected: 
-                <a href="#" style="color: #4ecdc4; margin: 0 0.5rem;">Twitter</a>
-                <a href="#" style="color: #4ecdc4; margin: 0 0.5rem;">Facebook</a>
-                <a href="#" style="color: #4ecdc4; margin: 0 0.5rem;">LinkedIn</a>
-            </p>
-        </div>
-    </footer>
     <script src="./assets/js/script.js"></script>
         
 </body>
